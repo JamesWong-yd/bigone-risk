@@ -1,15 +1,17 @@
 <template>
   <div>
-    <div :is="card" @changeCard="changeCard"></div>
+    <manage v-if="card === 'manage'" @changeCard="changeCard"></manage>
+    <add-danger v-else @changeCard="changeCard"></add-danger>
   </div>
 </template>
 <script>
 import Manage from './manage'
-import Add from './add'
+import AddDanger from './add'
 export default {
+  name: 'manageIndex',
   components: {
     Manage,
-    Add
+    AddDanger
   },
   data () {
     return {
