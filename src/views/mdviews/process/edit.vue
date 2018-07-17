@@ -194,7 +194,9 @@ export default {
     }
   },
   methods: {
-    changeCard() {},
+    changeCard() {
+      this.$emit('changeCard', 'manage')
+    },
     handlePreview() {},
     handleRemove() {}
   }

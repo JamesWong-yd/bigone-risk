@@ -2,7 +2,7 @@
   <div class="main">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>风险点管理</span>
+        <span>风险核查</span>
         <!-- <div class="btn" >
           <el-button type="primary" @click="changeCard">添加风险点</el-button>
         </div> -->
@@ -116,6 +116,10 @@
           </el-table-column>
           <el-table-column label="操作" width="200">
             <template slot-scope="scope">
+              <el-button
+              size="mini"
+              type=""
+              @click="handleEdit(scope.$index, scope.row)">查看</el-button>
               <el-button
                 size="mini"
                 type="warning"
