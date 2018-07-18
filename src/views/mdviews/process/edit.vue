@@ -5,9 +5,9 @@
         <span>风险处理</span>
         <div class="btn">
           <el-button @click="changeCard">返回</el-button>
-          <el-button type="primary">提交核查</el-button>
-          <el-button type="primary">风险移除</el-button>
-          <el-button type="primary">保存</el-button>
+          <el-button type="primary" v-if="type==='edit'">提交核查</el-button>
+          <el-button type="primary" v-if="type==='edit'">风险移除</el-button>
+          <el-button type="primary" v-if="type==='edit'">保存</el-button>
         </div>
       </div>
       <el-row>
@@ -33,29 +33,29 @@
             <el-row>
               <el-col :span="8">
                 <el-form-item label="风险流水号" >
-                  <el-input v-model="form.a"></el-input>
+                  <el-input v-model="form.a" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="16">
                 <el-form-item label="项目名称" >
-                  <el-input v-model="form.b"></el-input>
+                  <el-input v-model="form.b" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="8">
                 <el-form-item label="风险点产生日期" >
-                  <el-input v-model="form.c"></el-input>
+                  <el-input v-model="form.c" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="触发风险点" >
-                  <el-input v-model="form.d"></el-input>
+                  <el-input v-model="form.d" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="所属业务处室" >
-                  <el-select v-model="form.e" placeholder="请选择" style="width:100%">
+                  <el-select v-model="form.e" placeholder="请选择" style="width:100%" :disabled="true">
                   <el-option label="办公室" value="办公室"></el-option>
                   <el-option label="组织人事处（政策法规处）" value="组织人事处（政策法规处）"></el-option>
                   <el-option label="计划资金处" value="计划资金处"></el-option>
@@ -70,7 +70,7 @@
             <el-row>
               <el-col :span="8">
                 <el-form-item label="业务类别" required>
-                  <el-select v-model="form.f" placeholder="请选择" style="width:100%">
+                  <el-select v-model="form.f" placeholder="请选择" style="width:100%" :disabled="true">
                     <el-option label="旧村改造" value="旧村改造"></el-option>
                     <el-option label="旧厂改造" value="旧厂改造"></el-option>
                     <el-option label="旧城镇改造" value="旧城镇改造"></el-option>
@@ -79,12 +79,12 @@
               </el-col>
               <el-col :span="8">
                 <el-form-item label="报送人" >
-                  <el-input v-model="form.g"></el-input>
+                  <el-input v-model="form.g" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="风险点级别" required>
-                  <el-select v-model="form.h" placeholder="请选择" style="width:100%">
+                  <el-select v-model="form.h" placeholder="请选择" style="width:100%" :disabled="true">
                     <el-option label="高" value="高"></el-option>
                     <el-option label="中" value="中"></el-option>
                     <el-option label="低" value="低"></el-option>
@@ -95,7 +95,7 @@
             <el-row>
               <el-col :span="24">
                 <el-form-item label="问题描述" >
-                  <el-input v-model="form.i" type="textarea" :rows="2"></el-input>
+                  <el-input v-model="form.i" type="textarea" :rows="2" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -104,12 +104,12 @@
             <el-row>
               <el-col :span="8">
                 <el-form-item label="案件风险状态" >
-                  <el-input v-model="form.j"></el-input>
+                  <el-input v-model="form.j" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
                 <el-form-item label="处理人" >
-                  <el-select v-model="form.k" placeholder="默认当前操作人" multiple style="width:100%">
+                  <el-select v-model="form.k" placeholder="默认当前操作人" multiple style="width:100%" :disabled="type!=='edit'">
                     <el-option label="人员1" value="人员1"></el-option>
                     <el-option label="人员2" value="人员2"></el-option>
                     <el-option label="人员3" value="人员3"></el-option>
@@ -122,7 +122,7 @@
               </el-col>
               <el-col :span="8">
                  <el-form-item label="中止时限" >
-                    <el-input placeholder="" v-model="form.l">
+                    <el-input placeholder="" v-model="form.l" :disabled="type!=='edit'">
                       <template slot="append">天</template>
                     </el-input>
                  </el-form-item>
@@ -131,19 +131,12 @@
             <el-row>
               <el-col :span="24">
                 <el-form-item label="处理结果及理由" >
-                  <el-input v-model="form.m" type="textarea" :rows="2"></el-input>
+                  <el-input v-model="form.m" type="textarea" :rows="2" :disabled="type!=='edit'"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="24">
-                <el-form-item label="处理结果及理由" >
-                  <el-input v-model="form.n" type="textarea" :rows="2"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-form-item label="附件" >
+              <el-form-item label="附件" v-if="type==='edit'" >
               <el-upload
                 class="upload-demo"
                 action="https://jsonplaceholder.typicode.com/posts/"
@@ -159,8 +152,8 @@
             <el-row>
               <el-col :span="24">
                 <el-form-item label="操作" >
-                  <el-radio v-model="form.o" label="1">风险解锁</el-radio>
-                  <el-radio v-model="form.o" label="2">锁定案件</el-radio> </el-form-item>
+                  <el-radio v-model="form.o" label="1" :disabled="type!=='edit'">风险解锁</el-radio>
+                  <el-radio v-model="form.o" label="2" :disabled="type!=='edit'">锁定案件</el-radio> </el-form-item>
               </el-col>
             </el-row>
           </el-form>
@@ -171,31 +164,37 @@
 </template>
 <script>
 export default {
+  props: {
+    type: {
+      type: String,
+      default: 'look'
+    }
+  },
   data() {
     return {
       form: {
-        a: '',
-        b: '',
-        c: '',
-        d: '',
-        e: '',
-        f: '',
-        g: '',
-        h: '',
-        i: '',
-        j: '',
-        k: '',
-        l: '',
-        m: '',
+        a: 'YW180700001',
+        b: '天河区棠下旧村庄全面改造成本核算项目',
+        c: '2018-05-25',
+        d: '拆运费',
+        e: '项目审核处',
+        f: '旧村改造',
+        g: '罗嘉伟',
+        h: '高',
+        i: '天河区棠下项目中门牌号为A05的户主的拆用费大于每平方30元',
+        j: '案件已被锁止',
+        k: '默认当前操作人',
+        l: '3',
+        m: '由于房屋周遭的环境问题影响导致的费用增加，请查看上传的附件照片。',
         n: '',
-        o: ''
+        o: '1'
       },
       fileList2: []
     }
   },
   methods: {
     changeCard() {
-      this.$emit('changeCard', 'manage')
+      this.$emit('changeCard', {card:'manage',type: 'add'})
     },
     handlePreview() {},
     handleRemove() {}

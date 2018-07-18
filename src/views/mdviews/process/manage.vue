@@ -2,7 +2,7 @@
   <div class="main">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>风险核查</span>
+        <span>风险处理</span>
         <!-- <div class="btn" >
           <el-button type="primary" @click="changeCard">添加风险点</el-button>
         </div> -->
@@ -67,6 +67,7 @@
         <hr color="#ccc">
         <!--  -->
         <el-table
+          :stripe="true"
           :data="tabledata"
           :fit="true">
           <el-table-column
@@ -119,11 +120,11 @@
               <el-button
               size="mini"
               type=""
-              @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+              @click="handleEdit('look')">查看</el-button>
               <el-button
                 size="mini"
                 type="warning"
-                @click="handleEdit(scope.$index, scope.row)">处理风险点</el-button>
+                @click="handleEdit('edit')">处理风险点</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -171,8 +172,8 @@ export default {
   methods: {
     handleSizeChange() {},
     handleCurrentChange() {},
-    handleEdit() {
-      this.$emit('changeCard', 'add')
+    handleEdit(ei) {
+      this.$emit('changeCard', { card: 'add', type: ei })
     },
     handleChange() {},
     changeCard() {

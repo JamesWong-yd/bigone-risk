@@ -11,6 +11,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import vsscroll from 'vue-seamless-scroll'
+Vue.use(vsscroll)
+
 // import i18n from './lang' // Internationalization
 import './icons' // icon
 import './errorLog'// error log

@@ -9,6 +9,7 @@
           </div>
           <div>
             <el-table
+              :stripe="true"
               :data="tabledata"
               style="width: 100%">
               <el-table-column

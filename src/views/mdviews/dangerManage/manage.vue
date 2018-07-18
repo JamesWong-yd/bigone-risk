@@ -45,6 +45,7 @@
         </div>
         <!--  -->
         <el-table
+          :stripe="true"
           :data="tabledata"
           :fit="true">
           <el-table-column
@@ -82,7 +83,11 @@
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                @click="handleEdit('look')">查看</el-button>
+              <el-button
+                size="mini"
+                type="warning"
+                @click="handleEdit('edit')">修改</el-button>
               <el-button
                 size="mini"
                 type="danger"
@@ -131,12 +136,12 @@ export default {
   methods: {
     handleSizeChange() {},
     handleCurrentChange() {},
-    handleEdit() {
-      this.$emit('changeCard', 'add')
+    handleEdit(ei) {
+      this.$emit('changeCard', { card: 'add', type: ei })
     },
     handleChange() {},
     changeCard() {
-      this.$emit('changeCard', 'add')
+      this.$emit('changeCard', { card: 'add', type: 'add' })
     },
     dangerComputed(val) {
       if (val === '高') {

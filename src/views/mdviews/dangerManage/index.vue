@@ -1,7 +1,7 @@
 <template>
   <div>
     <manage v-if="card === 'manage'" @changeCard="changeCard"></manage>
-    <add-danger v-else @changeCard="changeCard"></add-danger>
+    <add-danger v-else @changeCard="changeCard" :type="type"></add-danger>
   </div>
 </template>
 <script>
@@ -15,12 +15,14 @@ export default {
   },
   data () {
     return {
-      card: 'manage'
+      card: 'manage',
+      type: 'add'
     }
   },
   methods: {
     changeCard(val){
-      this.card = val
+      this.card = val.card
+      this.type = val.type
     }
   }
 }
