@@ -59,7 +59,7 @@ export default {
           }
         },
         legend: {
-          data: ['低风险', '中风险','高风险']
+          data: ['低风险', '中风险', '高风险']
         },
         grid: {
           top: 40,
@@ -99,7 +99,7 @@ export default {
             type: 'bar',
             stack: 'vistors',
             barWidth: '30%',
-            data: [79, 52, 19, 334, 390, 330, 220],
+            data: [9, 5, 2, 4, 9, 10, 8],
             animationDuration,
             itemStyle: {
               normal: {
@@ -112,7 +112,7 @@ export default {
             type: 'bar',
             stack: 'vistors',
             barWidth: '30%',
-            data: [80, 52, 200, 334, 390, 330, 220],
+            data: [8, 5, 20, 3, 9, 14, 20],
             animationDuration,
             itemStyle: {
               normal: {
@@ -125,7 +125,7 @@ export default {
             type: 'bar',
             stack: 'vistors',
             barWidth: '30%',
-            data: [30, 52, 17, 334, 45, 66, 12],
+            data: [8, 9, 11, 8, 10, 3, 18],
             animationDuration,
             itemStyle: {
               normal: {

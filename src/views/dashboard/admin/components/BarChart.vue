@@ -82,21 +82,21 @@ export default {
           type: 'bar',
           stack: 'vistors',
           barWidth: '60%',
-          data: [79, 52, 200, 334, 390, 330, 220],
+          data: [9, 5, 2, 4, 9, 10, 8],
           animationDuration
         }, {
           name: 'pageB',
           type: 'bar',
           stack: 'vistors',
           barWidth: '60%',
-          data: [80, 52, 200, 334, 390, 330, 220],
+          data: [8, 5, 20, 3, 9, 14, 20],
           animationDuration
         }, {
           name: 'pageC',
           type: 'bar',
           stack: 'vistors',
           barWidth: '60%',
-          data: [30, 52, 200, 334, 390, 330, 220],
+          data: [8, 9, 11, 8, 10, 3, 18],
           animationDuration
         }]
       })
