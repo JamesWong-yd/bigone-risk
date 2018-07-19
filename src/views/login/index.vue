@@ -3,7 +3,7 @@
     <div class="login-title">城市更新局廉政风险智能防控系统</div>
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
       <div class="title-container">
-        <h3 class="title">登陆</h3>
+        <h3 class="title" style="color:#333;">登陆</h3>
         <!-- <lang-select class="set-language"></lang-select> -->
       </div>
       <el-form-item prop="username">
@@ -77,8 +77,12 @@ export default {
         password: '1111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [
+          { required: true, trigger: 'blur', validator: validateUsername }
+        ],
+        password: [
+          { required: true, trigger: 'blur', validator: validatePassword }
+        ]
       },
       passwordType: 'password',
       loading: false,
@@ -97,12 +101,15 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: '/' })
-          }).catch(() => {
-            this.loading = false
-          })
+          this.$store
+            .dispatch('LoginByUsername', this.loginForm)
+            .then(() => {
+              this.loading = false
+              this.$router.push({ path: '/' })
+            })
+            .catch(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!!')
           return false
@@ -138,15 +145,19 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-$bg:#2d3a4b;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$light_gray: #eee;
 
 /* reset element-ui css */
 .login-container {
-  .login-title{
+  width: 100%;
+  height: 100%;
+  background: url('../../assets/bg.jpg') no-repeat;
+  background-size: cover;
+  .login-title {
     font-size: 40px;
     text-align: center;
-    color: #fff;
+    color: #333;
     position: fixed;
     top: 17%;
     left: 0;
@@ -163,7 +174,7 @@ $light_gray:#eee;
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
-      color: $light_gray;
+      color: #333;
       height: 47px;
       &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -181,9 +192,9 @@ $light_gray:#eee;
 </style>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   position: fixed;

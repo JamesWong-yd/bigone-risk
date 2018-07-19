@@ -14,7 +14,7 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="业务类别" required>
-                <el-select v-model="form.a" placeholder="请选择" style="width:100%" :disabled="type!=='add'">
+                <el-select v-model="form.a" placeholder="请选择" style="width:100%" :disabled="type ==='look'">
                   <el-option label="旧村改造" value="旧村改造"></el-option>
                   <el-option label="旧厂改造" value="旧厂改造"></el-option>
                   <el-option label="旧城镇改造" value="旧城镇改造"></el-option>
@@ -28,14 +28,14 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="风险点名称" required>
-                <el-input v-model="form.c" :disabled="type!=='add'"></el-input>
+                <el-input v-model="form.c" :disabled="type ==='look'"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="8">
               <el-form-item label="风险点级别" required>
-                <el-select v-model="form.e" placeholder="请选择" style="width:100%" :disabled="type!=='add'">
+                <el-select v-model="form.e" placeholder="请选择" style="width:100%" :disabled="type ==='look'">
                   <el-option label="高" value="高"></el-option>
                   <el-option label="中" value="中"></el-option>
                   <el-option label="低" value="低"></el-option>
@@ -44,12 +44,12 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="风险点描述" required>
-                <el-input v-model="form.f" :disabled="type!=='add'"></el-input>
+                <el-input v-model="form.f" :disabled="type ==='look'"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="参数信息" required>
-                <el-input v-model="form.g" :disabled="type!=='add'"></el-input>
+                <el-input v-model="form.g" :disabled="type ==='look'"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -252,7 +252,7 @@
           </el-form>
           <!--  -->
           <div v-if="form.t">
-            <el-button type="text" style="float:right">添加阈值项</el-button>
+            <el-button type="text" style="float:right" v-if="type !=='look'" @click="dialogFormVisible= true">添加阈值项</el-button>
             <el-table
               :data="tableData2"
               style="width: 100%">
@@ -262,23 +262,41 @@
               </el-table-column>
               <el-table-column
                 prop="a"
-                label="风险数量设置（个）">
-              </el-table-column>
-              <el-table-column
-                prop="b"
-                label="风险级别设置">
+                label="风险数量设置（个）"
+                >
+                <template slot-scope="scope">{{scope.row.a}}~{{scope.row.b}}
+               </template>
               </el-table-column>
               <el-table-column
                 prop="c"
-                label="时间">
+                label="风险级别设置">
               </el-table-column>
               <el-table-column
+                prop="d"
+                label="时间">
+                <template slot-scope="scope">
+                {{scope.row.d[0]}}至{{scope.row.d[1]}}
+               </template>
+              </el-table-column>
+              <el-table-column
+                prop="e"
+                label="状态"
+                >
+                <template slot-scope="scope">
+                <el-tag
+                  :type="scope.row.e ==='生效'? 'success': 'danger'"
+                  disable-transitions>{{scope.row.e}}</el-tag>
+               </template>
+              </el-table-column>
+              <el-table-column
+                v-if="type !=='look'"
                 fixed="right"
                 label="操作"
                 width="100">
                 <template slot-scope="scope">
-                  <el-button @click="handleClick(scope.row)" type="text" size="small">修改</el-button>
-                  <el-button @click="handleChange(scope.row)" type="text" size="small">失效</el-button>
+                  <el-button @click="editfirmTo(scope.row)" type="text" size="small">修改</el-button>
+                  <el-button v-if="scope.row.e === '失效'" @click="scope.row.e = '生效'" type="text" size="small">失效</el-button>
+                  <el-button v-else @click="scope.row.e ='失效'" type="text" size="small">生效</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -286,6 +304,40 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
+    <el-dialog :width="'500px'" title="添加阈值项" :close-on-click-modal="false" :visible.sync="dialogFormVisible">
+      <el-form :model="formy" label-width="80px">
+        <el-form-item label="风险个数" required>
+          <el-input v-model="formy.a" style="width:40%"></el-input> 至
+          <el-input v-model="formy.b" style="width:40%"></el-input>
+        </el-form-item>
+        <el-form-item label="风险级别" required>
+          <el-select v-model="formy.c" placeholder="请选择">
+            <el-option  label="高" value="高"></el-option>
+            <el-option  label="中" value="中"></el-option>
+            <el-option  label="低" value="低"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="时间" required>
+          <el-date-picker
+            v-model="formy.d"
+            type="daterange"
+            range-separator="至"
+            value-format="yyyy-MM-dd"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="状态" required>
+          <el-radio v-model="formy.e" label="生效" value="生效">生效</el-radio>
+          <el-radio v-model="formy.e" label="失效" value="失效">失效</el-radio>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirmto">{{editflag? '修 改': '添 加'}}</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 <script>
@@ -298,6 +350,7 @@ export default {
   },
   data() {
     return {
+      dialogFormVisible: false,
       title: '添加',
       form: {
         a: '',
@@ -329,6 +382,20 @@ export default {
         sss: '',
         ssss: '',
         t: false
+      },
+      formy: {
+        a: '',
+        b: '',
+        c: '',
+        d: '',
+        e: ''
+      },
+      formy1: {
+        a: '',
+        b: '',
+        c: '',
+        d: '',
+        e: ''
       },
       form1: {
         a: '旧厂改造',
@@ -397,10 +464,24 @@ export default {
       activeName2: '1',
       activeName3: '1',
       tableData2: [
-        { a: '10 ~ 1000', b: '高', c: '2018-07-10 至 2018-07-30' },
-        { a: '10 ~ 1000', b: '高', c: '2018-07-10 至 2018-07-30' },
-        { a: '10 ~ 1000', b: '高', c: '2018-07-10 至 2018-07-30' }
-      ]
+        {
+          id: '1',
+          a: '100',
+          b: '1000',
+          c: '高',
+          d: ['2018-07-10', '2018-07-30'],
+          e: '生效'
+        },
+        {
+          id: '2',
+          a: '50',
+          b: '99',
+          c: '中',
+          d: ['2018-07-10', '2018-07-30'],
+          e: '生效'
+        }
+      ],
+      editflag: false
     }
   },
   computed: {
@@ -420,11 +501,40 @@ export default {
     }
   },
   methods: {
+    confirmto() {
+      if (
+        !this.formy.a ||
+        !this.formy.b ||
+        !this.formy.c ||
+        !this.formy.d ||
+        !this.formy.e
+      ) {
+        this.$message.error('请输入必填项后再提交')
+        return
+      }
+      if (!this.editflag) {
+        this.formy.id = new Date() * 1
+        this.tableData2.push(this.formy)
+      } else {
+        this.tableData2.map(item => {
+          if (item.id === this.formy.id) {
+            item = JSON.parse(JSON.stringify(this.formy))
+          }
+        })
+        this.editflag = false
+      }
+      this.formy = JSON.parse(JSON.stringify(this.formy1))
+      this.dialogFormVisible = false
+    },
+    editfirmTo(val) {
+      this.editflag = true
+      this.dialogFormVisible = true
+      this.formy = val
+    },
     changeCard() {
       this.$emit('changeCard', { card: 'manage', type: 'add' })
     },
-    handleClick() {},
-    handleChange() {}
+    handleClick() {}
   }
 }
 </script>

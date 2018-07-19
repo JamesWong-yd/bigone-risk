@@ -63,9 +63,9 @@
             <span>实时风险提示信息</span>
           </div>
           <div class="bigone-cansecl">
-            <el-collapse @change="handleChange">
-              <el-collapse-item title="关于拆迁费的风险信息" name="1">
-                <div class="bigone-cancel-color">报送者1报送了一条关于拆迁费的风险信息，请尽快处理。</div>
+            <el-collapse @change="handleChange" accordion>
+              <el-collapse-item title="关于临迁费的风险信息" name="1">
+                <div class="bigone-cancel-color">报送者1报送了一条关于临迁费的风险信息，请尽快处理。</div>
               </el-collapse-item>
               <el-collapse-item title="关于拆运费的风险信息" name="2">
                 <div class="bigone-cancel-color">报送者2报送了一条关于拆运费的风险信息，请尽快处理。</div>

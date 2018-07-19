@@ -119,7 +119,8 @@
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.$index, scope.row)">查看</el-button>
+                type="warning"
+                @click="handleEdit('edit')">处理</el-button>
             </template>
           </el-table-column>
         </el-table>

@@ -59,7 +59,7 @@
               </el-col>
               <el-col :span="6" style="text-align:right;padding-right:42px">
                 <el-button type="primary">查询</el-button>
-                <el-button>重置</el-button>
+                <el-button @click="reset">重置</el-button>
               </el-col>
             </el-row>
           </el-form>
@@ -117,11 +117,11 @@
           </el-table-column>
           <el-table-column label="操作" width="200">
             <template slot-scope="scope">
-              <el-button
+              <el-button v-if="scope.row.g !== '未处理'"
               size="mini"
               type=""
-              @click="handleEdit('look')">查看</el-button>
-              <el-button
+              @click="handleEdit('look')">查看风险点</el-button>
+              <el-button v-else
                 size="mini"
                 type="warning"
                 @click="handleEdit('edit')">处理风险点</el-button>
@@ -170,6 +170,15 @@ export default {
     })
   },
   methods: {
+    reset() {
+      this.tabledata.map(item => {
+        if (item.c === '中') {
+          item.c = '高'
+        } else if (item.c === '高') {
+          item.c = '中'
+        }
+      })
+    },
     handleSizeChange() {},
     handleCurrentChange() {},
     handleEdit(ei) {

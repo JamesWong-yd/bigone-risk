@@ -3,9 +3,9 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>风险报告</span>
-        <div class="btn" >
+        <!-- <div class="btn" >
           <el-button @click="changeCard">查看统计</el-button>
-        </div>
+        </div> -->
       </div>
       <el-form :model="ruleForm" ref="ruleForm" label-width="150px" >
         <el-row>
