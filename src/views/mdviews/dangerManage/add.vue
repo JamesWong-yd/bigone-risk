@@ -252,7 +252,7 @@
           </el-form>
           <!--  -->
           <div v-if="form.t">
-            <el-button type="text" style="float:right" v-if="type !=='look'" @click="dialogFormVisible= true">添加阈值项</el-button>
+            <el-button type="text" style="float:right" v-if="type !=='look'" @click="dialogFormVisible= true">{{editflag? '修 改': '添 加'}}阈值项</el-button>
             <el-table
               :data="tableData2"
               style="width: 100%">
