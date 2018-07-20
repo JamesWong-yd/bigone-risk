@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <div class="login-title">城市更新局廉政风险智能防控系统</div>
+    <div class="login-title"><img src="./logo1.png"/> 城市更新局廉政风险智能防控系统</div>
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
       <div class="title-container">
         <h3 class="title" style="color:#333;">登陆</h3>
@@ -162,6 +162,11 @@ $light_gray: #eee;
     top: 17%;
     left: 0;
     right: 0;
+    img{
+      widows: 65px;
+      height: 65px;
+      vertical-align: middle;
+    }
     // transform: translateY(20%)
   }
   .el-input {

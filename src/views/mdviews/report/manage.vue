@@ -21,6 +21,7 @@
           <el-col :span="8">
             <el-form-item label="时间范围" prop="region">
               <el-date-picker
+                style="width:320px"
                 v-model="ruleForm.b"
                 type="daterange"
                 range-separator="至"
@@ -43,11 +44,42 @@
             </el-form-item>
           </el-col>
           <el-col :span="3" style="text-align:center;padding-right:42px">
-            <el-button type="primary" @click="downloadpdf">生成报告</el-button>
+            <el-button >查询</el-button>
           </el-col>
         </el-row>
       </el-form>
-      <div v-if="pdfshow">
+      <div>
+        <el-table
+          :stripe="true"
+          :data="tabledata"
+          :fit="true">
+          <el-table-column
+            type="index"
+            width="50">
+          </el-table-column>
+          <el-table-column
+            prop="a"
+            label="业务类型">
+          </el-table-column>
+          <el-table-column
+            prop="b"
+            label="统计开始时间">
+          </el-table-column>
+          <el-table-column
+            prop="c"
+            label=" 统计结束时间">
+          </el-table-column>
+          <el-table-column label="操作" width="200">
+            <template slot-scope="scope">
+              <el-button v-if="scope.row.g !== '未处理'"
+              size="mini"
+              type=""
+              @click="downloadpdf">查看报告</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div v-if="pdfshow" style="margin-top: 20px">
         <!--  -->
         <embed src="./static/aaaa.pdf" type="application/pdf" width="100%" :style="{height:heights+'px'}"></embed>
       </div>
@@ -55,7 +87,7 @@
   </div>
 </template>
 <script>
-import FXDGL from '@/mock/FXHC'
+import BB from './BB'
 
 export default {
   name: 'aaa',
@@ -79,6 +111,9 @@ export default {
     }
   },
   created() {
+    this.tabledata = BB.filter((item, index) => {
+      return index < 10
+    })
     this.heights = this.heightsChange()
     let _this = this
     window.onresize = function() {
