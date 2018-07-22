@@ -17,10 +17,9 @@
           <div class="my-edit" style="height: 400px;width:200px;margin: 0 auto">
             <el-steps direction="vertical" :active="3" >
               <el-step title="开始"></el-step>
-              <el-step title="预收监控"></el-step>
-              <el-step title="收件"></el-step>
-              <el-step title="处理"></el-step>
-              <el-step title="增证"></el-step>
+              <el-step title="风险告警"></el-step>
+              <el-step title="风险处理"></el-step>
+              <el-step title="风险核查"></el-step>
               <el-step title="审核"></el-step>
               <el-step title="结束"></el-step>
             </el-steps>
